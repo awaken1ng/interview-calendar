@@ -1,62 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-function App() {
-  const App = styled.div`
-    text-align: center;
-  `;
+import Topbar from './components/Topbar';
+import Timeline from './components/Timeline';
+import Footer from './components/Footer';
+import WeekSwitcher from './components/WeekSwitcher';
 
-  const AppHeader = styled.header`
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  `;
-
-  const AppLogoSpin = keyframes`
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  `;
-  const AppLogo = styled.img`
-    height: 40vmin;
-    pointer-events: none;
-
-    @media (prefers-reduced-motion: no-preference) {
-      animation: ${AppLogoSpin} infinite 20s linear;
-    }
-  `;
-
-  const AppLink = styled.a`
-    color: #61dafb;
-  `;
+export default function App() {
+  const onAddClick = () => console.log('add');
+  const onPrevWeekClick = () => console.log('prev');
+  const onNextWeekClick = () => console.log('next');
+  const onTodayClick = () => console.log('today');
+  const onDeleteClick = () => console.log('delete');
 
   return (
-    <App>
-      <AppHeader>
-        <AppLogo src={logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <AppLink
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </AppLink>
-      </AppHeader>
-    </App>
+    <Container>
+      <Topbar onAddClick={onAddClick}></Topbar>
+
+      <WeekSwitcher
+        onPrevWeekClick={onPrevWeekClick}
+        onNextWeekClick={onNextWeekClick}
+      >
+      </WeekSwitcher>
+
+      <Timeline></Timeline>
+
+      <Footer
+        onTodayClick={onTodayClick}
+        onDeleteClick={onDeleteClick}
+      >
+      </Footer>
+    </Container>
   );
 }
 
-export default App;
+const Container = styled.div`
+  font-size: 1.7rem;
+  color: black;
+  background-color: white;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

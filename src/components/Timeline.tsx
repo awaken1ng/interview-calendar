@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import { pallete, EightColumnGrid } from '../styles';
-import { HEIGHT as FOOTER_HEIGHT } from './Footer';
 
 export default function Timeline() {
   // 8 columns (1 for time, 7 for days), 24 rows (for each hour)
@@ -29,16 +28,12 @@ export default function Timeline() {
   }
 
   return (
-    <Container>
+    <EightColumnGrid>
       {grid}
-    </Container>
+    </EightColumnGrid>
   )
 }
 
-
-const Container = styled(EightColumnGrid)`
-  margin-bottom: ${FOOTER_HEIGHT};
-`;
 
 const Hour = styled.div`
   display: inline;

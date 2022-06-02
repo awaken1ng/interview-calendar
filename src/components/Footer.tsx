@@ -22,13 +22,11 @@ export default function Footer(props: Props) {
 }
 
 
-export const HEIGHT = '6rem';
-
 const Container = styled(MaxWidth)`
   // sticky to the bottom
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  height: ${HEIGHT};
+  height: 6rem;
 
   display: flex;
   justify-content: space-between;

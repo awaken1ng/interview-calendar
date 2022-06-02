@@ -67,17 +67,17 @@ export default function WeekSwitcher({
 
   return (
     <Container>
-        {weekDayNames}
+      {weekDayNames}
 
-        {weekDaysOfMonth}
+      {weekDaysOfMonth}
 
-        {/* skip first column */}
-        <Button onClick={onPrevWeekClick} style={{gridColumn: '2 / 3'}}>‹</Button>
-        <MonthYear>
-          {format(weekSelected, 'LLLL yyyy')}
-        </MonthYear>
-        <Button onClick={onNextWeekClick}>›</Button>
-      </Container>
+      {/* skip first column */}
+      <Button onClick={onPrevWeekClick} style={{gridColumn: '2 / 3'}}>‹</Button>
+      <MonthYear>
+        {format(weekSelected, 'LLLL yyyy')}
+      </MonthYear>
+      <Button onClick={onNextWeekClick}>›</Button>
+    </Container>
   )
 }
 

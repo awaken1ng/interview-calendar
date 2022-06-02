@@ -1,15 +1,20 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import { addWeeks, subWeeks } from 'date-fns';
 
 import Topbar from './components/Topbar';
+import WeekSwitcher from './components/WeekSwitcher';
 import Timeline from './components/Timeline';
 import Footer from './components/Footer';
-import WeekSwitcher from './components/WeekSwitcher';
+
 
 export default function App() {
+  let [selectedWeek, setSelectedWeek] = useState(new Date());
+
   const onAddClick = () => console.log('add');
-  const onPrevWeekClick = () => console.log('prev');
-  const onNextWeekClick = () => console.log('next');
-  const onTodayClick = () => console.log('today');
+  const onPrevWeekClick = () => setSelectedWeek(subWeeks(selectedWeek, 1));
+  const onNextWeekClick = () => setSelectedWeek(addWeeks(selectedWeek, 1));
+  const onTodayClick = () => setSelectedWeek(new Date());
   const onDeleteClick = () => console.log('delete');
 
   return (
@@ -17,6 +22,7 @@ export default function App() {
       <Topbar onAddClick={onAddClick}></Topbar>
 
       <WeekSwitcher
+        selectedWeek={selectedWeek}
         onPrevWeekClick={onPrevWeekClick}
         onNextWeekClick={onNextWeekClick}
       >

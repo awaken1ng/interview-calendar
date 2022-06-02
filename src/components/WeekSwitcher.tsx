@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { format, startOfWeek, endOfWeek, eachDayOfInterval, isSameDay } from 'date-fns';
 import ru from 'date-fns/locale/ru'
@@ -5,11 +6,10 @@ import ru from 'date-fns/locale/ru'
 import { pallete, EightColumnGrid } from '../styles';
 
 
-function daysOfCurentWeek() {
-  const now = new Date();
+function daysOfWeek(date: Date): Date[] {
   const options = { locale: ru };
-  const weekStart = startOfWeek(now, options);
-  const weekEnd = endOfWeek(now, options);
+  const weekStart = startOfWeek(date, options);
+  const weekEnd = endOfWeek(date, options);
   return eachDayOfInterval({ start: weekStart, end: weekEnd });
 }
 
@@ -17,22 +17,27 @@ interface Props {
   // workaround for
   // > Type '{ children: never[]; onPrevWeekClick: () => void; onNextWeekClick: () => void; }' is not assignable to type 'IntrinsicAttributes & Props'.
   // > Property 'children' does not exist on type 'IntrinsicAttributes & Props'.
-  children?: React.ReactNode
-  onPrevWeekClick?: React.MouseEventHandler<HTMLDivElement>,
-  onNextWeekClick?: React.MouseEventHandler<HTMLDivElement>,
+  children?: React.ReactNode;
+  selectedWeek: Date;
+  onPrevWeekClick?: React.MouseEventHandler<HTMLDivElement>;
+  onNextWeekClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-export default function WeekSwitcher(props: Props) {
+export default function WeekSwitcher({
+  selectedWeek,
+  onPrevWeekClick,
+  onNextWeekClick
+}: Props) {
   const now = new Date();
-  const week = daysOfCurentWeek();
+  const week = daysOfWeek(selectedWeek);
 
   const weekDays = week
     .map((date, index) => {
       const dayOfWeekNumber = format(date, 'i');
       const dayOfWeekSingleLetter = format(date, 'EEEEE');
-      const style: React.CSSProperties = {};
 
       // skip the first column and lay out from second column
+      const style: React.CSSProperties = {};
       if (index === 0) style.gridColumn = '2 / 3';
 
       return <DayOfWeek key={dayOfWeekNumber} style={style}>
@@ -51,6 +56,7 @@ export default function WeekSwitcher(props: Props) {
         day = <Day>{dayOfMonth}</Day>;
       }
 
+      // skip the first column and lay out from second column
       const style: React.CSSProperties = {};
       if (index === 0) style.gridColumn = '2 / 3';
 
@@ -66,11 +72,11 @@ export default function WeekSwitcher(props: Props) {
         {weekDates}
 
         {/* skip first column */}
-        <Button onClick={props.onPrevWeekClick} style={{gridColumn: '2 / 3'}}>‹</Button>
+        <Button onClick={onPrevWeekClick} style={{gridColumn: '2 / 3'}}>‹</Button>
         <MonthYear>
-          {format(now, 'LLLL yyyy')}
+          {format(selectedWeek, 'LLLL yyyy')}
         </MonthYear>
-        <Button onClick={props.onNextWeekClick}>›</Button>
+        <Button onClick={onNextWeekClick}>›</Button>
       </Container>
   )
 }

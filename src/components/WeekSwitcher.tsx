@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { format, startOfWeek, endOfWeek, eachDayOfInterval } from 'date-fns';
+import { format, startOfWeek, endOfWeek, eachDayOfInterval, isSameDay } from 'date-fns';
 import ru from 'date-fns/locale/ru'
 
 import { pallete, EightColumnGrid } from '../styles';
@@ -45,7 +45,7 @@ export default function WeekSwitcher(props: Props) {
       let dayOfMonth = format(date, 'd');
 
       let day;
-      if (now.getDate().toString() === dayOfMonth) {
+      if (isSameDay(now, date)) {
         day = <Today>{dayOfMonth}</Today>;
       } else {
         day = <Day>{dayOfMonth}</Day>;

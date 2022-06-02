@@ -9,11 +9,11 @@ import Footer from './components/Footer';
 
 
 export default function App() {
-  let [selectedWeek, setSelectedWeek] = useState(new Date());
+  let [weekSelected, setSelectedWeek] = useState(new Date());
 
   const onAddClick = () => console.log('add');
-  const onPrevWeekClick = () => setSelectedWeek(subWeeks(selectedWeek, 1));
-  const onNextWeekClick = () => setSelectedWeek(addWeeks(selectedWeek, 1));
+  const onPrevWeekClick = () => setSelectedWeek(subWeeks(weekSelected, 1));
+  const onNextWeekClick = () => setSelectedWeek(addWeeks(weekSelected, 1));
   const onTodayClick = () => setSelectedWeek(new Date());
   const onDeleteClick = () => console.log('delete');
 
@@ -22,7 +22,7 @@ export default function App() {
       <Topbar onAddClick={onAddClick}></Topbar>
 
       <WeekSwitcher
-        selectedWeek={selectedWeek}
+        weekSelected={weekSelected}
         onPrevWeekClick={onPrevWeekClick}
         onNextWeekClick={onNextWeekClick}
       >

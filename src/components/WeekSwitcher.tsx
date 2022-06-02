@@ -18,20 +18,20 @@ interface Props {
   // > Type '{ children: never[]; onPrevWeekClick: () => void; onNextWeekClick: () => void; }' is not assignable to type 'IntrinsicAttributes & Props'.
   // > Property 'children' does not exist on type 'IntrinsicAttributes & Props'.
   children?: React.ReactNode;
-  selectedWeek: Date;
+  weekSelected: Date;
   onPrevWeekClick?: React.MouseEventHandler<HTMLDivElement>;
   onNextWeekClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 export default function WeekSwitcher({
-  selectedWeek,
+  weekSelected,
   onPrevWeekClick,
   onNextWeekClick
 }: Props) {
   const now = new Date();
-  const week = daysOfWeek(selectedWeek);
+  const week = daysOfWeek(weekSelected);
 
-  const weekDays = week
+  const weekDayNames = week
     .map((date, index) => {
       const dayOfWeekNumber = format(date, 'i');
       const dayOfWeekSingleLetter = format(date, 'EEEEE');
@@ -45,7 +45,7 @@ export default function WeekSwitcher({
       </DayOfWeek>
     });
 
-  const weekDates = week
+  const weekDaysOfMonth = week
     .map((date, index) => {
       let dayOfMonth = format(date, 'd');
 
@@ -67,14 +67,14 @@ export default function WeekSwitcher({
 
   return (
     <Container>
-        {weekDays}
+        {weekDayNames}
 
-        {weekDates}
+        {weekDaysOfMonth}
 
         {/* skip first column */}
         <Button onClick={onPrevWeekClick} style={{gridColumn: '2 / 3'}}>‹</Button>
         <MonthYear>
-          {format(selectedWeek, 'LLLL yyyy')}
+          {format(weekSelected, 'LLLL yyyy')}
         </MonthYear>
         <Button onClick={onNextWeekClick}>›</Button>
       </Container>

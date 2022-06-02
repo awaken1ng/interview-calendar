@@ -22,14 +22,23 @@ export default function Footer(props: Props) {
 }
 
 
+export const HEIGHT = '6rem';
+
 const Container = styled(MaxWidth)`
+  // sticky to the bottom
+  position: fixed;
+  bottom: 0;
+  height: ${HEIGHT};
+
   display: flex;
   justify-content: space-between;
   background-color: ${pallete.background};
 `;
 
 const Button = styled.div`
+  display: flex;
+  align-items: center;
   color: ${pallete.red};
-  padding: 2rem;
+  padding: 0 2rem;
   user-select: none;
 `;

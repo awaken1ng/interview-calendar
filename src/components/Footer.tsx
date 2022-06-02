@@ -31,6 +31,8 @@ const Container = styled(MaxWidth)`
   display: flex;
   justify-content: space-between;
   background-color: ${pallete.background};
+
+  border-top: 0.2rem solid ${pallete.border};
 `;
 
 const Button = styled.div`

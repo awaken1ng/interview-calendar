@@ -1,42 +1,55 @@
+import styled from 'styled-components';
+
 import { pallete, EightColumnGrid } from '../styles';
 
 
 export default function Timeline() {
   // 8 columns (1 for time, 7 for days), 24 rows (for each hour)
-  const hours = [];
+  const grid = [];
   for (let index = 0; index < 8 * 24; index++) {
     const isDay = index % 8;
     const isMidnight = index === 0;
-    const isFirstHour = index === 1;
     const isLastRow = index > 8 * 23;
     const isWeekEnd = index % 8 === 7;
 
-    if (isDay) {
-      const style: React.CSSProperties = {
-        height: '4rem',
-      };
-      if (isFirstHour) style.gridColumn = '2 / 3';
-      if (!isLastRow) style.borderBottom = `0.2rem solid ${pallete.border}`;
-      if (!isWeekEnd) style.borderRight = `0.2rem solid ${pallete.border}`;
-
-      hours.push(<div key={index} style={style}></div>);
-    } else {
-      const style: React.CSSProperties = {
-        color: '#9f9f9f',
-        display: 'inline',
-        marginTop: '-1.2rem',
-        fontSize: '85%',
-      };
+    if (!isDay) {
+      // since we're aligning hour to the grid line,
+      // 0:00 would end up out of grid bounds
       if (isMidnight) continue;
 
       const hour = (index / 8).toString().padStart(2, "0") + ":00";
-      hours.push(<div key={index} style={style}>{hour}</div>);
+      grid.push(<Hour key={index}>{hour}</Hour>);
+    } else {
+      const style: React.CSSProperties = {};
+      if (!isLastRow) style.borderBottom = `0.2rem solid ${pallete.border}`;
+      if (!isWeekEnd) style.borderRight = `0.2rem solid ${pallete.border}`;
+
+      grid.push(<Day key={index} style={style}></Day>);
     }
   }
 
   return (
     <EightColumnGrid>
-      {hours}
+      {grid}
     </EightColumnGrid>
   )
 }
+
+
+const Hour = styled.div`
+  display: inline;
+  color: #9f9f9f;
+  font-size: 85%;
+  // align with the grid lines
+  margin-top: -1.2rem;
+
+`;
+
+const Day = styled.div`
+  height: 4rem;
+
+  // we skipped 0:00, so first cell is empty, start laying out days from second cell
+  &:nth-child(1) {
+    grid-column: 2 / 3;
+  }
+`;

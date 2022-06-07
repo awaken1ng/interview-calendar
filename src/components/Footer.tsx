@@ -7,16 +7,17 @@ interface Props {
   // workaround for
   // > Type '{ children: never[]; onPrevWeekClick: () => void; onNextWeekClick: () => void; }' is not assignable to type 'IntrinsicAttributes & Props'.
   // > Property 'children' does not exist on type 'IntrinsicAttributes & Props'.
-  children?: React.ReactNode
-  onTodayClick?: React.MouseEventHandler<HTMLDivElement>,
-  onDeleteClick?: React.MouseEventHandler<HTMLDivElement>,
+  children?: React.ReactNode;
+  isEventSelected: boolean;
+  onTodayClick?: React.MouseEventHandler<HTMLDivElement>;
+  onDeleteClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-export default function Footer(props: Props) {
+export default function Footer({ isEventSelected, onTodayClick, onDeleteClick }: Props) {
   return (
     <Container>
-      <Button onClick={props.onTodayClick}>Today</Button>
-      <Button onClick={props.onDeleteClick}>Delete</Button>
+      <Button onClick={onTodayClick}>Today</Button>
+      {isEventSelected && <Button onClick={onDeleteClick}>Delete</Button>}
     </Container>
   )
 }

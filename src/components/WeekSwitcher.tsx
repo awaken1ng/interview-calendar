@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { format, startOfWeek, endOfWeek, eachDayOfInterval, isSameDay } from 'date-fns';
-import ru from 'date-fns/locale/ru'
 
 import { pallete, EightColumnGrid } from '../styles';
-
+import { locale } from '../App';
 
 function daysOfWeek(date: Date): Date[] {
-  const options = { locale: ru };
+  const options = { locale };
   const weekStart = startOfWeek(date, options);
   const weekEnd = endOfWeek(date, options);
   return eachDayOfInterval({ start: weekStart, end: weekEnd });

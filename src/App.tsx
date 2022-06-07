@@ -21,9 +21,13 @@ export const dateToKey = (date: Date): string => {
 };
 
 export default function App() {
+  const demoEvent = new Date();
+  demoEvent.setHours(1);
+  const demoEvents = [dateToKey(demoEvent)]
+
   let [weekSelected, setSelectedWeek] = useState(new Date());
   let [dayHourSelected, setSelectedDayHour] = useState<Date | undefined>(undefined);
-  let [events, setEvents] = useState(new Set<string>());
+  let [events, setEvents] = useState(new Set<string>(demoEvents));
 
   const onAddClick = () => {
     const input = prompt("Enter event time: YYYY-MM-DD HH:mm:ss");

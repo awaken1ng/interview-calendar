@@ -15,7 +15,7 @@ interface Props {
   onDayClick(date: Date): void;
 }
 
-export default function Timeline({ weekSelected, events, onDayClick }: Props) {
+export default function Timeline({ weekSelected, dayHourSelected, events, onDayClick }: Props) {
   const indexToDateAndTime = (index: number) => {
     const clickedDayOfWeekNmber = index % 8;
     const offset = clickedDayOfWeekNmber - getISODay(weekSelected);
@@ -28,6 +28,8 @@ export default function Timeline({ weekSelected, events, onDayClick }: Props) {
   };
 
   const weekStart = startOfWeek(weekSelected, { locale });
+  let dateSelectedKey = undefined;
+  if (dayHourSelected) dateSelectedKey = dateToKey(dayHourSelected);
 
   // 8 columns (1 for time, 7 for days), 24 rows (for each hour)
   const grid = [];
@@ -60,9 +62,12 @@ export default function Timeline({ weekSelected, events, onDayClick }: Props) {
       const date = addDays(weekStart, dayOfWeek - 1);
       date.setHours(hour);
       const key = dateToKey(date);
+      const isSelected = key === dateSelectedKey;
       const isScheduled = events.has(key);
 
-      if (isScheduled) {
+      if (isSelected) {
+        grid.push(<SelectedDay {...props}></SelectedDay>)
+      } else if (isScheduled) {
         grid.push(<ScheduledDay {...props}></ScheduledDay>)
       } else {
         grid.push(<Day {...props}></Day>);
@@ -122,6 +127,20 @@ const ScheduledDay = styled(Day)`
 
   &:nth-child(n+1):hover::before,
   &:nth-child(n+1):active::before {
+    background-color: #b3b7ff;
+  }
+`;
+
+const SelectedDay = styled(Day)`
+  &::before,
+  &:nth-child(n+1):hover::before,
+  &:nth-child(n+1):active::before {
+    content: "";
+    position: absolute;
+    top: 0.2rem;
+    left: 0.2rem;
+    width: calc(100% - 0.2rem * 2);
+    height: calc(100% - 0.2rem * 2);
     background-color: #b3b7ff;
   }
 `;

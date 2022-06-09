@@ -21,9 +21,11 @@ export const dateToKey = (date: Date): string => {
 };
 
 export default function App() {
-  const demoEvent = new Date();
-  demoEvent.setHours(1);
-  const demoEvents = [dateToKey(demoEvent)]
+  const demoEvent1 = new Date();
+  demoEvent1.setHours(1);
+  const demoEvent2 = new Date();
+  demoEvent1.setHours(2);
+  const demoEvents = [dateToKey(demoEvent1), dateToKey(demoEvent2)];
 
   let [weekSelected, setSelectedWeek] = useState(new Date());
   let [dayHourSelected, setSelectedDayHour] = useState<Date | undefined>(undefined);

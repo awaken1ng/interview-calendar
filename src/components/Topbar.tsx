@@ -27,11 +27,11 @@ const Container = styled(MaxWidth)`
 `;
 
 const Header = styled.header`
-  margin: 3rem 2rem;
+  margin: 2.5rem 2rem;
 `;
 
 const Button = styled.div`
   color: ${pallete.red};
-  padding: 3rem 2rem;
+  padding: 2.5rem 2rem;
   user-select: none;
 `;

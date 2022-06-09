@@ -6,6 +6,9 @@ pages:
     - ./node_modules/
 
   stage: deploy
+  variables:
+    # https://create-react-app.dev/docs/advanced-configuration/
+    PUBLIC_URL: '/$CI_PROJECT_NAME'
   script:
   - npm install
   - npm run build

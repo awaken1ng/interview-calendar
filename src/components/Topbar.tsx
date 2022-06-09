@@ -4,24 +4,37 @@ import { pallete, MaxWidth } from '../styles';
 
 
 interface Props {
-  // workaround for
-  // > Type '{ children: never[]; onPrevWeekClick: () => void; onNextWeekClick: () => void; }' is not assignable to type 'IntrinsicAttributes & Props'.
-  // > Property 'children' does not exist on type 'IntrinsicAttributes & Props'.
   children?: React.ReactNode
   onAddClick?: React.MouseEventHandler<HTMLDivElement>
 }
 
-export default function Topbar(props: Props) {
+export default function Topbar({ onAddClick, children }: Props) {
   return (
-    <Container>
-      <Header>Interview Calendar</Header>
-      <Button onClick={props.onAddClick}>+</Button>
-    </Container>
+    <Sticky>
+      <SpaceBetween>
+        <Header>Interview Calendar</Header>
+        <Button onClick={onAddClick}>+</Button>
+      </SpaceBetween>
+      {children}
+    </Sticky>
   )
 }
 
+const Sticky = styled(MaxWidth)`
+  display: flex;
+  flex-direction: column;
 
-const Container = styled(MaxWidth)`
+  position: sticky;
+  top: 0;
+
+  // lift up the topbar so it's above the timeline
+  // also requires setting a background,
+  // since it's transparent otherwise
+  z-index: 1;
+  background-color: white;
+`;
+
+const SpaceBetween = styled(MaxWidth)`
   display: flex;
   justify-content: space-between;
 `;

@@ -72,14 +72,16 @@ export default function App() {
 
   return (
     <Container>
-      <Topbar onAddClick={onAddClick}></Topbar>
-
-      <WeekSwitcher
-        weekSelected={weekSelected}
-        onPrevWeekClick={onPrevWeekClick}
-        onNextWeekClick={onNextWeekClick}
+      <Topbar
+        onAddClick={onAddClick}
       >
-      </WeekSwitcher>
+        <WeekSwitcher
+          weekSelected={weekSelected}
+          onPrevWeekClick={onPrevWeekClick}
+          onNextWeekClick={onNextWeekClick}
+        >
+        </WeekSwitcher>
+      </Topbar>
 
       <Timeline
         weekSelected={weekSelected}

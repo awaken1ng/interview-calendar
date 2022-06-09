@@ -27,7 +27,7 @@ const Container = styled(MaxWidth)`
   // sticky to the bottom
   position: sticky;
   bottom: 0;
-  height: 6rem;
+  height: 5rem;
 
   display: flex;
   justify-content: space-between;

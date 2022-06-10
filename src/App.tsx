@@ -58,6 +58,7 @@ export default function App() {
   const onDeleteClick = () => {
     // delete selected event, if there's one
     if (!dayHourSelected) return
+    if (!window.confirm(`Delete event at ${dayHourSelected}?`)) return
     const key = dateToKey(dayHourSelected);
     events.delete(key);
     setSelectedDayHour(undefined);

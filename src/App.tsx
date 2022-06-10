@@ -24,7 +24,7 @@ export default function App() {
   const demoEvent1 = new Date();
   demoEvent1.setHours(1);
   const demoEvent2 = new Date();
-  demoEvent1.setHours(2);
+  demoEvent2.setHours(2);
   const demoEvents = [dateToKey(demoEvent1), dateToKey(demoEvent2)];
 
   let [weekSelected, setSelectedWeek] = useState(new Date());

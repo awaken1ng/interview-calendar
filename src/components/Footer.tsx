@@ -42,4 +42,8 @@ const Button = styled.div`
   color: ${pallete.red};
   padding: 0 2rem;
   user-select: none;
+
+  &:hover, &:active {
+    background-color: ${pallete.border};
+  }
 `;

@@ -110,7 +110,7 @@ const Day = styled.div`
     left: 0.2rem;
     width: calc(100% - 0.2rem * 2);
     height: calc(100% - 0.2rem * 2);
-    background-color: #f6f6f6;
+    background-color: ${pallete.background};
   }
 `;
 

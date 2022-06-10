@@ -137,6 +137,10 @@ const Button = styled.div`
 
   color: ${pallete.red};
   user-select: none;
+
+  &:hover, &:active {
+    background-color: ${pallete.border};
+  }
 `;
 
 const MonthYear = styled.div`

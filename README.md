@@ -1,3 +1,12 @@
+# Assignment requirements
+Make an SPA using `React`, `create-react-app`, `styled-components` and deploy it on any static site hosting.
+
+After selecting an event, `Delete` button should show up.
+
+After clicking on `+`, standard pop up (`prompt` function) shows up for adding an event.
+
+For page width of `<= 740px`, calendar should evenly stretch. For page width of `> 740px`, calendar width should be `740px`, and it should be horizontally centered on the page.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
